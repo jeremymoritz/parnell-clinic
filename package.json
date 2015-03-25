@@ -1,0 +1,13 @@
+{
+  "name": "HelloParnell",
+  "version": "0.1.0",
+  "description": "Hello World Parnell Style",
+  "author": "Parnell Digital Technology Team",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeremymoritz/hello-parnell.git"
+  },
+  "devDependencies": {
+  }
+}
