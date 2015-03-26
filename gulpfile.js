@@ -38,11 +38,12 @@ var react = require('gulp-react');
 
 //  Delete all files (not folders) in the dist directory
 gulp.task('clean-dist', function taskCleanDist() {
-	del(['dist/**/*.*']);
-	// fs.mkdirSync('dist/js');
-	// fs.mkdirSync('dist/css');
-	// fs.mkdirSync('dist/lib');
-	// fs.mkdirSync('dist/resources');
+	del(['dist/**/*'], function createFolders() {
+		fs.mkdirSync('dist/js');
+		fs.mkdirSync('dist/css');
+		fs.mkdirSync('dist/lib');
+		fs.mkdirSync('dist/resources');
+	});
 });
 
 //  Turn Jade into HTML
