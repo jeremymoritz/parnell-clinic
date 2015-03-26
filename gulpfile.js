@@ -38,11 +38,12 @@ var react = require('gulp-react');
 
 //  Delete all files (not folders) in the dist directory
 gulp.task('clean-dist', function taskCleanDist() {
-	del(['dist/**/*'], function createFolders() {
-		fs.mkdirSync('dist/js');
-		fs.mkdirSync('dist/css');
-		fs.mkdirSync('dist/lib');
-		fs.mkdirSync('dist/resources');
+	del(['dist/**/*.*'], function createFolders() {
+		// fs.mkdirSync('dist/js');
+		// fs.mkdirSync('dist/css');
+		// fs.mkdirSync('dist/lib');
+		// fs.mkdirSync('dist/resources');
+		// fs.mkdirSync('dist/img');
 	});
 });
 
@@ -78,7 +79,9 @@ gulp.task('scripts', function taskScripts() {
 // Copy static directory without changes
 gulp.task('copy-static', function taskCopyStatic() {
 	gulp.src('src/static/lib/*')
-	.pipe(gulp.dest('dist/lib'));
+		.pipe(gulp.dest('dist/lib'));
+	gulp.src('src/static/img/*')
+		.pipe(gulp.dest('dist/img'));
 
 	return gulp.src('src/static/resources/*')
 		.pipe(gulp.dest('dist/resources'));
