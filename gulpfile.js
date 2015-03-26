@@ -13,9 +13,10 @@
 
 
 // Include gulp
-var gulp = require('gulp'); 
+var gulp = require('gulp');
 
 // Include Our Plugins
+var fs = require('fs');
 var del = require('del');
 var jade = require('gulp-jade');
 var jshint = require('gulp-jshint');
@@ -36,64 +37,70 @@ var react = require('gulp-react');
 // };
 
 //  Delete all files (not folders) in the dist directory
-gulp.task('clean-dist', function() {
-    del(['dist/**/*.*']);
+gulp.task('clean-dist', function taskCleanDist() {
+	del(['dist/**/*.*']);
+	// fs.mkdirSync('dist/js');
+	// fs.mkdirSync('dist/css');
+	// fs.mkdirSync('dist/lib');
+	// fs.mkdirSync('dist/resources');
 });
 
 //  Turn Jade into HTML
-gulp.task('template', function() {
-    return gulp.src('src/jade/index.jade')
-        .pipe(jade({pretty: true}))
-        .pipe(gulp.dest('dist'));
+gulp.task('template', function taskTemplate() {
+	return gulp.src('src/jade/index.jade')
+		.pipe(jade({pretty: true}))
+		.pipe(gulp.dest('dist'));
 });
 
 // Compile Our Sass
-gulp.task('sass', function() {
-    return gulp.src('src/scss/*.scss')
-        .pipe(sass())
-        .pipe(gulp.dest('dist/css'));
+gulp.task('sass', function taskSass() {
+	return gulp.src('src/scss/*.scss')
+		.pipe(sass())
+		.pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('transpile-jsx', function() {
+gulp.task('transpile-jsx', function taskTranspileJSX() {
   return gulp.src('src/js/*.jsx')
-    .pipe(react({harmony: true}))   //  convert to .js files
-    .pipe(gulp.dest('dist/js'));
+		.pipe(react({harmony: true}))   //  convert to .js files
+		.pipe(gulp.dest('dist/js'));
 });
 
 // Lint and JSCS our scripts
-gulp.task('scripts', function() {
-    return gulp.src('src/js/*.js')
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'))
-        .pipe(jscs())
-        .pipe(gulp.dest('dist/js'));
+gulp.task('scripts', function taskScripts() {
+	return gulp.src('src/js/*.js')
+		.pipe(jshint())
+		.pipe(jshint.reporter('default'))
+		.pipe(jscs())
+		.pipe(gulp.dest('dist/js'));
 });
 
 // Copy static directory without changes
-gulp.task('copy-static', function() {
-    gulp.src('src/static/lib/*')
-    .pipe(gulp.dest('dist/lib'));
+gulp.task('copy-static', function taskCopyStatic() {
+	gulp.src('src/static/lib/*')
+	.pipe(gulp.dest('dist/lib'));
 
-    return gulp.src('src/static/resources/*')
-        .pipe(gulp.dest('dist/resources'));
+	return gulp.src('src/static/resources/*')
+		.pipe(gulp.dest('dist/resources'));
 });
 
 // Watch Files For Changes
-gulp.task('watch', function watchSrcAndUpdateDist() {
-    // gulp.watch('gulpfile.js', ['default']);
-    gulp.watch('src/jade/*.jade', ['template']);
-    gulp.watch('src/js/*', ['transpile-jsx', 'scripts']);
-    gulp.watch('src/scss/*.scss', ['sass']);
-    gulp.watch('src/static/**/*', ['copy-static']);
+gulp.task('watch', function taskWatchSrcAndUpdateDist() {
+	// gulp.watch('gulpfile.js', ['default']);
+	gulp.watch('src/jade/*.jade', ['template']);
+	gulp.watch('src/js/*', ['transpile-jsx', 'scripts']);
+	gulp.watch('src/scss/*.scss', ['sass']);
+	gulp.watch('src/static/**/*', ['copy-static']);
 });
 
 // Default Task (perform these tasks in order)
 gulp.task('default', [
-    'clean-dist',
-	'template', 
-    'transpile-jsx',
-	'sass', 
-	'scripts', 
-    'copy-static',
+	'clean-dist',
+	'template',
+	'transpile-jsx',
+	'sass',
+	'scripts',
+	'copy-static',
 	'watch'
-]);
+], function showWatching() {
+	console.log('Gulp is watching...');
+});
