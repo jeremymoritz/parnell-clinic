@@ -2,9 +2,19 @@ doctype html
 html
 	head
 		title Hello Parnell!
+		meta(charset='UTF-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		meta(name='description', content='Parnell Pharmaceuticals')
+		meta(name='keywords', content='Parnell, Pharmaceuticals')
 		script(src='lib/react.js')
 		script(src='http://code.jquery.com/jquery-latest.js')
 		script(src='http://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js')
+		link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css')
+		link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css')
+		link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css')
 		link(href='css/index.css' rel='stylesheet')
 	body
-		include helloparnell
+		.container
+			.row
+				.col-xs-12
+					include helloparnell

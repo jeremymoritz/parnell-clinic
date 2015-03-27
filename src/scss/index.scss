@@ -2,4 +2,12 @@
 
 $primary-color: #c00;
 
-h1 {color: $primary-color;}
+#hello-parnell {
+	text-align: center;
+
+	h1 {
+		color: $primary-color;
+		margin: 50px auto;
+	}
+	img {margin: auto;}
+}
