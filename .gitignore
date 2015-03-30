@@ -16,6 +16,7 @@ logs
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
+Web.config
 
 # Folder config file
 Desktop.ini
