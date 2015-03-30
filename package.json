@@ -1,12 +1,12 @@
 {
-  "name": "HelloParnell",
+  "name": "ParnellClinicApp",
   "version": "0.1.0",
-  "description": "Hello World Parnell Style",
+  "description": "Parnell Clinic",
   "author": "Parnell Digital Technology Team",
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jeremymoritz/hello-parnell.git"
+    "url": "https://github.com/jeremymoritz/parnell-clinic.git"
   },
   "devDependencies": {
     "del": "^1.1.1",

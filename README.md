@@ -1,4 +1,3 @@
-# hello-parnell
-Hello World - Parnell Style
+# parnell-clinic
+Clinic Wire Frame work up
 
-"Hello Parnell!??"
