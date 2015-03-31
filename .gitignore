@@ -18,6 +18,16 @@ $RECYCLE.BIN/
 logs
 *.log
 
+# Huge files
+*.mp4
+*.psd
+*.m4v
+*.ogg
+*.webm
+*.mp3
+*.wav
+*.wma
+*.wmv
 
 # Directories
 **/node_modules

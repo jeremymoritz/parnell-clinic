@@ -1,0 +1,150 @@
+/* Parnell Styling */
+/* Variables */
+
+/* Account for nav bar at top of every page. */
+@font-face {
+	font-family: RobotoSlab;
+	src: url(../fonts/RobotoSlab-Regular.ttf);
+}
+@font-face {
+	font-family: RobotoSlab;
+	src: url(../fonts/RobotoSlab-Bold.ttf);
+	font-weight: bold;
+}
+
+body {
+	margin: 0;
+	padding-top: 90px;
+	font-family: RobotoSlab, sans-serif;
+}
+
+/* Undo boopstrap's default */
+label {
+	font-weight: normal;
+
+	&.required {
+		font-weight: bold;
+
+		&:after {content: '*';}
+	}
+}
+a {cursor: pointer;}
+ul {
+	padding-left: 0;
+
+	li {list-style-type: none;}
+}
+.top-buffer-5 {margin-top: 5px;}
+.top-buffer, .top-buffer-10 {margin-top: 10px;}
+.top-buffer-20 {margin-top: 20px;}
+.children-top-buffer-5 > div {margin-top: 5px;}
+.children-top-buffer > div, .children-top-buffer-10 > div {margin-top: 10px;}
+.children-top-buffer-20 > div {margin-top: 20px;}
+
+input[type='text'], textarea {
+	&.form-control {
+		margin-top: 2px;
+		margin-bottom: 3px;
+	}
+}
+
+.obnoxious {  //  this will NOT be used on the site.  It is only for testing purposes (verifying jade/javascript selectors etc.)
+	background: red !important;
+	border: 3px solid #0b0 !important;
+	color: purple !important;
+	box-shadow: 5px 5px 5px #00d !important;
+}
+
+/* Checkbox/label alignment */
+.pnl-checkbox-group {
+	input[type="checkbox"] {float: left;}
+	label {
+		display: block;
+		margin-left: 18px;
+	}
+}
+
+.pnl-navbar-tabs {
+	@media screen and (min-width: $screen-sm-min) {
+		height: 42px;
+		min-height: 42px;
+
+		.navbar-brand {line-height: 0;}
+		.navbar-header {height: 42px;}
+	}
+}
+
+/* Variations on the Flatly Theme */
+
+.panel {
+	box-shadow: 1px 1px 3px $gray;
+}
+input[type='checkbox'], input[type='radio'] {
+	display:inline-block;
+	width:20px;
+	height:20px;
+	vertical-align: text-bottom;
+}
+.font-awesome-style input {
+	&[type='checkbox'], &[type='radio'] {
+		display: none;
+
+		& + label:before {
+			cursor: pointer;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			font-size: x-large;
+			position: relative;
+			top: 4px;
+			font-family: FontAwesome;
+			margin-right: 5px;
+		}
+	}
+	&[type='checkbox'] {
+		@mixin check-animation {
+			from {opacity: 0.5;}
+			to {opacity: 1;}
+		}
+
+		@-webkit-keyframes draw-check {@include check-animation;}
+		@keyframes draw-check {@include check-animation;}
+		@-webkit-keyframes erase-check {@include check-animation;}
+		@keyframes erase-check {@include check-animation;}
+
+		&:checked + label:before {
+			content: '\f096';
+			-webkit-animation: draw-check 0.5s;
+			animation: draw-check 0.5s;
+		}
+		&:not(:checked) + label:before {
+			content: '\f046';
+			-webkit-animation: erase-check 0.5s;
+			animation: erase-check 0.5s;
+		}
+	}
+	&[type='radio'] {
+		& + label:before {content: '\f1db';}
+		&:checked + label:before {content: '\f192';}
+	}
+}
+
+.inline-list li {
+	display: inline;
+
+	& + li {margin-left: 10px;}
+}
+
+/* Page-specific Styles */
+#advertorial {
+	text-align: center;
+
+	h1 {
+		color: $brand-primary;
+		text-decoration: none;
+		font-style: normal;
+		margin: 50px auto;
+	}
+	img {margin: auto;}
+}
+

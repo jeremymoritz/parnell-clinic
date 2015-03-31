@@ -1,21 +1,23 @@
+include parnellmix
+
 doctype html
 html
 	head
 		title Parnell Veterinary Pharmaceuticals
 		meta(charset='UTF-8')
 		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge')
 		meta(name='description', content='Parnell Pharmaceuticals')
 		meta(name='keywords', content='Parnell, Pharmaceuticals')
-		script(src='lib/react/react.min.js')
 		script(src='lib/jquery/dist/jquery.min.js')
 		script(src='lib/lodash/lodash.min.js')
-		link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap.min.css')
-		link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap-theme.min.css')
-		link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap-theme.min.css')
-		link(rel='stylesheet', href='/lib/fontawesome/css/font-awesome.min.css')
-		link(href='css/index.css' rel='stylesheet')
+		script(src='lib/bootstrap-sass/assets/javascripts/bootstrap.min.js')
+		script(src='lib/react/react.min.js')
+		link(rel='stylesheet', href='css/index.css')
 	body
+		+pnl-navbar
 		.container
 			.row
-				.col-xs-12
-					include landing
+				+col(null)
+					include advertorial
+		script(src='js/parnell.js')

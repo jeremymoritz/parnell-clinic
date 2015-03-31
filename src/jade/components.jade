@@ -1,0 +1,296 @@
+#ComponentsPage
+	.container
+		.row
+			+col(12)
+				h1 Components
+		.row
+			+col(12, 6)
+				.panel.panel-default
+					.panel-heading
+						h2.panel-title Panels
+					.panel-body
+						p Panel with a heading
+			+col(12, 6)
+				.panel.panel-default
+					.panel-body
+						p Panel without Heading
+		.row
+			+col(12)
+				nav.navbar.navbar-default
+					.navbar-header
+						button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#collapseable-nav')
+							span.sr-only Toggle navigation
+							span.icon-bar
+							span.icon-bar
+							span.icon-bar
+						a.navbar-brand United Lex
+					#collapseable-nav.collapse.navbar-collapse
+						ul.nav.navbar-nav
+							li.active
+								a #[i.fa.fa-leaf] Link #[span.sr-only (current)]
+							li
+								a #[i.fa.fa-wheelchair] Link
+							li.dropdown
+								a.dropdown-toggle(data-toggle='dropdown', role='button', aria-expanded='false')
+									| Dropdown
+									i.fa.fa-caret-down
+								ul.dropdown-menu(role='menu')
+									li #[a #[i.fa.fa-shield] Action]
+									li #[a #[i.fa.fa-apple] Another action]
+									li #[a #[i.fa.fa-thumbs-down] Something else here]
+									li.divider
+									li #[a #[i.fa.fa-print] Separated link]
+									li.divider
+									li #[a #[i.fa.fa-umbrella] One more separated link]
+						form.navbar-form.navbar-left(role='search')
+							.form-group
+								input.form-control(type='text', placeholder='Search')
+							button.btn.btn-default(type='submit') Submit
+						ul.nav.navbar-nav.navbar-right
+							li #[a #[i.fa.fa-chain-broken] Link]
+		.row
+			+col(12).top-buffer
+				.panel.panel-default
+					.panel-heading
+						h2.panel-title Buttons
+					.panel-body
+						p
+							a.btn.btn-default(href='#') #[i.fa.fa-bell] Default
+							a.btn.btn-primary(href='#') #[i.fa.fa-music] Primary
+							a.btn.btn-success(href='#') #[i.fa.fa-tachometer] Success
+							a.btn.btn-info(href='#') #[i.fa.fa-unlock] Info
+							a.btn.btn-warning(href='#') #[i.fa.fa-arrow-circle-o-up] Warning
+							a.btn.btn-danger(href='#') #[i.fa.fa-money] Danger
+							a.btn.btn-link(href='#') #[i.fa.fa-key] Link
+						p
+							a.btn.btn-default.disabled(href='#') #[i.fa.fa-keyboard-o] Default
+							a.btn.btn-primary.disabled(href='#') #[i.fa.fa-btc] Primary
+							a.btn.btn-success.disabled(href='#') #[i.fa.fa-comments-o] Success
+							a.btn.btn-info.disabled(href='#') #[i.fa.fa-forward] Info
+							a.btn.btn-warning.disabled(href='#') #[i.fa.fa-trophy] Warning
+							a.btn.btn-danger.disabled(href='#') #[i.fa.fa-folder-open] Danger
+							a.btn.btn-link.disabled(href='#') #[i.fa.fa-headphones] Link
+		.row.top-buffer
+			+col(12)
+				.panel.panel-default
+					.panel-heading
+						h2.panel-title Checkboxes and Radio Buttons (also panel classes)
+					.panel-body
+						.row
+							+col(12, 6)
+								.panel.panel-info
+									.panel-heading
+										h3.panel-title FontAwesome Style
+									.panel-body
+										ul.font-awesome-style
+											li
+												input#cb1(type='checkbox')
+												label.control-label(for='cb1') Checkbox 1
+											li
+												input#cb2(type='checkbox')
+												label.control-label(for='cb2') Checkbox 2
+											li
+												input#rad1(type='radio', name='radioTimeAlt')
+												label.control-label(for='rad1') Radio 1
+											li
+												input#rad2(type='radio', name='radioTimeAlt')
+												label.control-label(for='rad2') Radio 2
+							+col(12, 6)
+								.panel.panel-primary
+									.panel-heading
+										h3.panel-title Alternate Native Style (Enlarged)
+									.panel-body
+										ul
+											li
+												input#cb3(type='checkbox')
+												label.control-label(for='cb3') Checkbox 3
+											li
+												input#cb4(type='checkbox')
+												label.control-label(for='cb4') Checkbox 4
+											li
+												input#rad3(type='radio', name='radioTime')
+												label.control-label(for='rad3') Radio 3
+											li
+												input#rad4(type='radio', name='radioTime')
+												label.control-label(for='rad4') Radio 4
+		.row.top-buffer
+			+col(12)
+				.panel.panel-default
+					.panel-heading
+						h2.panel-title Alerts
+					.panel-body
+						.alert.alert-dismissible.alert-info
+							button.close(type='button', data-dismiss='alert') &times;
+							p New search created.
+						.alert.alert-dismissible.alert-success
+							button.close(type='button', data-dismiss='alert') &times;
+							p Successfully completed build process.
+						.alert.alert-dismissible.alert-warning
+							button.close(type='button', data-dismiss='alert') &times;
+							h4 Warning!
+							p You are about to change an index that has dependent searches.
+						.alert.alert-dismissible.alert-danger
+							button.close(type='button', data-dismiss='alert') &times;
+							p I'm sorry, Dave.  I'm afraid I can't let you do that.
+		.row.top-buffer
+			+col(12, 6)
+				.panel.panel-success
+					.panel-heading
+						h2.panel-title List Group
+					.panel-body
+						ul.list-group
+							li.list-group-item
+								| List Group Item
+							li.list-group-item
+								| Another List Group Item
+							li.list-group-item
+								span.badge 14
+								| This has a badge
+			+col(12, 6)
+				.panel.panel-warning
+					.panel-heading
+						h2.panel-title Selectable List Group
+					.panel-body
+						div.list-group
+							a.list-group-item
+								| List Group Item
+							a.list-group-item
+								| Another List Group Item
+							a.list-group-item
+								span.badge 14
+								| This has a badge
+		.row.top-buffer
+			+col(12)
+				.panel.panel-default
+					.panel-heading
+						h2.panel-title Progress bars
+					.panel-body
+						h3 In Progress
+						.progress.progress-striped.active
+							.progress-bar.progress-bar-info(style='width: 40%')
+						h3 Just Now Completed (During Current Pageview)
+						.progress
+							.progress-bar.progress-bar-success(style='width: 100%;')
+						h3 Completed
+						.progress
+							.progress-bar.progress-bar-primary(style='width: 100%;')
+						h3 Error (Stopped Incomplete)
+						.progress
+							.progress-bar.progress-bar-danger(style='width: 60%')
+		.row
+			+col(12)
+				.panel.panel-default
+					.panel-heading
+						h2.panel-title Form
+					.panel-body
+						form.form-horizontal(role='form')
+							.form-group
+								label.control-label.col-sm-3.col-md-2.required Input Text:
+								+col(12, 9, 4)
+									input.form-control(type='text', placeholder='Type here')
+								label.control-label.col-sm-3.col-md-2 Date:
+								+col(12, 9, 4)
+									input.form-control(type='date')
+							.form-group
+								label.control-label.col-sm-3.col-md-2 Textarea:
+								+col(12, 9, 10)
+									textarea.form-control(type='text', placeholder='Text goes here')
+							.form-group
+								label.control-label.col-sm-3.col-md-2 Checkboxes:
+								+col(12, 9, 4).font-awesome-style
+									ul.inline-list
+										li
+											input#cb5(type='checkbox')
+											label(for='cb5') Checkbox 5
+										li
+											input#cb6(type='checkbox')
+											label(for='cb6') Checkbox 6
+								label.control-label.col-sm-3.col-md-2 Radio Buttons:
+								+col(12, 9, 4)
+									ul.font-awesome-style.inline-list
+										li
+											input#rad5(type='radio', name='radioTimeAlt')
+											label(for='rad5') Radio 5
+										li
+											input#rad6(type='radio', name='radioTimeAlt')
+											label(for='rad6') Radio 6
+							.form-group
+								label.control-label.col-sm-3.col-md-2 Select:
+								+col(12, 3, 4)
+									select.form-control
+										option Option One
+										option Option Two
+										option Option Three
+								label.control-label.col-sm-3.col-md-2 Datalist:
+								+col(12, 3, 4)
+									input.form-control(type='text', list='pets', placeholder='Preferred pet')
+									datalist#pets
+										option Cat
+										option Dog
+										option Fish
+		.row
+			+col(12)
+				.panel.panel-default
+					.panel-heading
+						h2.panel-title Paragraphs and Block Quotes
+					.panel-body
+						form(role='form')
+							.row
+								+col(12)
+									p Unstyled Paragraph: Lorem ipsum dolor sit amet, in probatus ocurreret intellegebat sed. Eam aeque quaeque no. Laudem recusabo quo et.
+									h3 Paragraph heading
+									p Prodesset mediocritatem ne sit. At regione inermis mei, mel odio denique offendit ea. Ad facer tollit vix. No nulla convenire iracundia eam. Vim id inani tamquam sensibus, mel at facilis accusam.
+									blockquote Block Quote: Usu id timeam scaevola, stet falli nemore nec ex, abhorreant delicatissimi has ut. Posse detracto ea pro. Dico dicta vim ad, an vim quem denique epicuri. Ius eu causae ornatus nostrum, te cum erat ponderum sadipscing, nec aeque munere ea.
+									.well Text in a Well:  Sint prompta ad vix, atqui sapientem assentior est ex, ponderum inciderint mediocritatem mea te.
+		.row
+			+col(12)
+				.panel.panel-default
+					.panel-heading
+						h2.panel-title Tables
+					.panel-body
+						h3 Static Table
+						table.table.table-striped
+							thead
+								tr
+									th Header 1
+									th Header 2
+									th Header 3
+							tbody
+								tr
+									td Abc
+									td Def
+									td Ghi
+								tr
+									td Jkl
+									td Mno
+									td Pqr
+								tr
+									td Stu
+									td Vwx
+									td Yz.
+						h3 Interactive Table
+						#racesGrid
+		.row
+			+col(12)
+				.modal(style='position: relative; display: block;')
+					.modal-dialog
+						.modal-content
+							.modal-header
+								button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;
+								h4.modal-title Modal title
+							.modal-body
+								p Modal Body&mldr;
+							.modal-footer
+								button.btn.btn-default(type='button', data-dismiss='modal') #[i.fa.fa-times] Close
+								button.btn.btn-primary(type='button') #[i.fa.fa-floppy-o] Save changes
+		.row
+			+col(12)
+				.modal(style='position: relative; display: block;')
+					.modal-dialog
+						.modal-content
+							.modal-body
+								button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;
+								p Are you sure you want to do this?  It's awfully daring.
+							.modal-footer
+								button.btn.btn-default(type='button', data-dismiss='modal') #[i.fa.fa-hand-o-left] On 2nd Thought...
+								button.btn.btn-primary(type='button') #[i.fa.fa-bomb] Trust Me

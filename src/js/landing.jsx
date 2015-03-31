@@ -4,5 +4,5 @@ React.render(
 		<h1>Parnell Clinic App</h1>
 		<img src='img/parnell-footer.jpg' alt className='img-responsive' />
 	</div>,
-	document.getElementById('landing')
+	document.getElementById('advertorial')
 );
