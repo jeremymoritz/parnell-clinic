@@ -1,13 +1,13 @@
-// SASS file
-
-$primary-color: #c00;
+$color1: #006;
 
 #landing {
-	text-align: center;
+  text-align: center;
 
-	h1 {
-		color: $primary-color;
-		margin: 50px auto;
-	}
-	img {margin: auto;}
+  h1 {
+    color: $color1;
+    text-decoration: none;
+    font-style: normal;
+    margin: 50px auto;
+  }
+  img {margin: auto;}
 }

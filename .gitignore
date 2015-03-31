@@ -2,35 +2,29 @@
 # Git IGNORE!!
 # =========================
 
-# Sublime files
-**/*.sublime-*
+# Windows config files
+Thumbs.db
+ehthumbs.db
+Web.config
+Desktop.ini
+
+# Mac desktop service store files
+.DS_Store
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
 
 # Logs
 logs
 *.log
 
-# =========================
-# Windows detritus
-# =========================
 
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
-Web.config
-
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# Mac desktop service store files
-.DS_Store
-
-# ignore the node_modules and coverage reports
+# Directories
 **/node_modules
 **/bower_components
-**/build
-**/coverage
-**/configuration.json
 **/dist
+
+# Config files & logs
+configuration.json
+*.sublime-*
+Web.config

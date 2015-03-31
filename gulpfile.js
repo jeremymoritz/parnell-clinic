@@ -22,7 +22,9 @@ var jade = require('gulp-jade');
 var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
 var sass = require('gulp-sass');
+var sourcemaps = require('gulp-sourcemaps');
 var react = require('gulp-react');
+var bower = require('gulp-bower');
 
 // var notify = require('gulp-notify');
 // function handleErrors(args) {
@@ -36,15 +38,10 @@ var react = require('gulp-react');
 //     this.emit('end');
 // };
 
-//  Delete all files (not folders) in the dist directory
-gulp.task('clean-dist', function taskCleanDist() {
-	del(['dist/**/*.*'], function createFolders() {
-		// fs.mkdirSync('dist/js');
-		// fs.mkdirSync('dist/css');
-		// fs.mkdirSync('dist/lib');
-		// fs.mkdirSync('dist/resources');
-		// fs.mkdirSync('dist/img');
-	});
+// Delete all files (not folders) in the dist directory
+//	NOTE: THIS IS NOT RUN AUTOMATICALLY
+gulp.task('clean', function taskClean() {
+	del(['dist/*']);
 });
 
 //  Turn Jade into HTML
@@ -56,8 +53,10 @@ gulp.task('template', function taskTemplate() {
 
 // Compile Our Sass
 gulp.task('sass', function taskSass() {
-	return gulp.src('src/scss/*.scss')
+	gulp.src('src/scss/*.scss')
+		.pipe(sourcemaps.init())
 		.pipe(sass())
+		.pipe(sourcemaps.write('./maps/'))
 		.pipe(gulp.dest('dist/css'));
 });
 
@@ -78,13 +77,19 @@ gulp.task('scripts', function taskScripts() {
 
 // Copy static directory without changes
 gulp.task('copy-static', function taskCopyStatic() {
-	gulp.src('src/static/lib/*')
-		.pipe(gulp.dest('dist/lib'));
 	gulp.src('src/static/img/*')
 		.pipe(gulp.dest('dist/img'));
 
-	return gulp.src('src/static/resources/*')
+	gulp.src('src/static/resources/*')
 		.pipe(gulp.dest('dist/resources'));
+});
+
+gulp.task('bower', function taskBower() {
+	return bower({
+			directory: './bower_components',
+			cwd: '.'
+		})
+		.pipe(gulp.dest('dist/lib'));
 });
 
 // Watch Files For Changes
@@ -98,13 +103,11 @@ gulp.task('watch', function taskWatchSrcAndUpdateDist() {
 
 // Default Task (perform these tasks in order)
 gulp.task('default', [
-	'clean-dist',
 	'template',
 	'transpile-jsx',
 	'sass',
 	'scripts',
 	'copy-static',
+	'bower',
 	'watch'
-], function showWatching() {
-	console.log('Gulp is watching...');
-});
+]);
