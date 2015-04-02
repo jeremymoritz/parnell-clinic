@@ -7,21 +7,30 @@ React.render(
 		</video>
 		<img src="img/parnell-footer.jpg" alt className="img-responsive" />
 	</div>,
-	document.getElementById('advertorial')
+	$('#advertorial')[0]
 );
 
 function playVideo() {
-	var vid = $('#oa-video')[0];
 	if (vid.paused || vid.ended) {
 		vid.muted = true;
 		vid.play();
 	}
 }
 
+var countIdle = 0;
+var vid = $('#oa-video')[0];
+
 setTimeout(function playVidAfterDelay() {
 	playVideo();
 }, 3000);
 
-setInterval(function playVidIfIdle() {
-	playVideo();
-}, 10 * 1000);	//	this should be changed to 2 minutes (2 * 60 * 1000)
+setInterval(function playVidIfIdleForTooLong() {
+	if (vid.paused || vid.ended) {
+		if (++countIdle >= (2 * 6)) {	//	idle for 2 consecutive minutes
+			playVideo();
+			countIdle = 0;
+		}
+	} else {
+		countIdle = 0;
+	}
+}, 10 * 1000);	//	every 10 seconds
