@@ -8,7 +8,7 @@ mixin col(xs, sm, md, lg)
 	- (md > 1 && md <= 12) ? items.push("col-md-" + md) : undefined
 	- (lg > 1 && lg <= 12) ? items.push("col-lg-" + lg) : undefined
 	- (!items.length) ? items.push("col-xs-12") : undefined
-	div(class=items.join(' '))&attributes(attributes)
+	section(class=items.join(' '))&attributes(attributes)
 		if block
 			block
 

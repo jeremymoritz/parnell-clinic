@@ -23,7 +23,6 @@ var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
-var react = require('gulp-react');
 var bower = require('gulp-bower');
 var concat = require('gulp-concat');
 var notify = require('gulp-notify');
@@ -84,21 +83,15 @@ gulp.task('sass', function taskSass() {
 		.pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('transpile-jsx', function taskTranspileJSX() {
-  gulp.src(path.JS)
-		.pipe(react({harmony: true}))   //  convert to .js files
-		.on('error', handleErrors)
-		.pipe(gulp.dest(path.DEST_JS));
-});
-
 // Lint and JSCS our scripts
 gulp.task('scripts', function taskScripts() {
-	gulp.src('dist/js/*.js')
+	gulp.src('src/js/*.js')
 		.pipe(jshint())
-		.pipe(jshint.reporter('default'))
 		.on('error', handleErrors)
+		.pipe(jshint.reporter('default'))
 		.pipe(jscs())
-		.on('error', handleErrors);
+		.on('error', handleErrors)
+		.pipe(gulp.dest(path.DEST_JS));
 });
 
 // Copy static directory without changes
@@ -121,22 +114,22 @@ gulp.task('bower', function taskBower() {
 gulp.task('watch', function taskWatchSrcAndUpdateDist() {
 	gulp.watch('gulpfile.js', ['default']);
 	gulp.watch('src/jade/*.jade', ['template']);
-	gulp.watch('src/js/*', ['transpile-jsx', 'scripts']);
+	gulp.watch('src/js/*', ['scripts']);
 	gulp.watch('src/scss/*.scss', ['sass']);
 	gulp.watch('src/static/**/*', ['copy-static']);
 });
 
-gulp.task('browserify', ['transpile-jsx'], function() {
+gulp.task('browserify', function taskBrowserify() {
 	var bundleMethod = global.isWatching ? watchify : browserify;
 
 	var bundler = bundleMethod({
 		// Specify the entry point of your app
-		entries: ['./dist/js/index.js'],
+		entries: ['./src/js'],
 		// Add file extentions to make optional in your requires
 		extensions: []
 	});
 
-	var bundle = function() {
+	var bundle = function bundleFunction() {
 		// Enable source maps!
 		return bundler
 			.bundle()
