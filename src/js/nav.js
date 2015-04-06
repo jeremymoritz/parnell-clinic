@@ -5,16 +5,17 @@ clinicApp.controller('NavCtrl', [
 	function IndexCtrl($s, $location) {
 		'use strict';
 
-		$s.views = [{
-			name: 'home',
-			display: 'Hello',
-			icon: 'truck'
-		},
-		{
-			name: 'advertorial',
-			display: 'Advertorial',
-			icon: 'puzzle-piece'
-		}];
+		$s.views = [
+			{
+				name: 'home',
+				display: 'Hello',
+				icon: 'truck'
+			}, {
+				name: 'advertorial',
+				display: 'Advertorial',
+				icon: 'puzzle-piece'
+			}
+		];
 
 		$s.navClass = function navClass(page) {
 			var currentRoute = $location.path().substring(1) || '';
@@ -22,14 +23,10 @@ clinicApp.controller('NavCtrl', [
 			return page === currentRoute ? 'active' : '';
 		};
 
-		$s.pages = [
-			'home',
-			'advertorial'
-		];
-		var defaultPage = $s.pages[0];
+		var defaultPage = $s.views[0].name;
 
 		$s.loadPage = function loadPage(page) {
-			$location.url(_.includes($s.pages, page) ? page : defaultPage);
+			$location.url(_.includes(_.pluck($s.views, 'name'), page) ? page : defaultPage);
 		};
 	}
 ]);
