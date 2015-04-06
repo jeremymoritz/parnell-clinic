@@ -1,7 +1,7 @@
 include parnellmix
 
 doctype html
-html
+html(ng-app='clinicApp')
 	head
 		title Parnell Veterinary Pharmaceuticals
 		meta(charset='UTF-8')
@@ -14,17 +14,18 @@ html
 		script(src='lib/angular-route/angular-route.js')
 		script(src='lib/lodash/lodash.js')
 		script(src='lib/moment/moment.js')
+		//- script(src='lib/angular-strap/dist/angular-strap.js')
+		//- script(src='lib/angular-strap/dist/angular-strap.tpl.js')
 		script(src='lib/bootstrap-sass/assets/javascripts/bootstrap.min.js')
 		link(rel='stylesheet', href='css/index.css')
-	body(ng-app='clinicApp', ng-controller='IndexCtrl')
+	body(ng-controller='IndexCtrl' ng-cloak)
 		+pnl-navbar
 		.container
 			.row
-				+col(null)(ng-if='chosenView.ctrl === "hello"')
-					include hello
-				+col(null)(ng-if='chosenView.ctrl === "adv"')
-					include advertorial
+				+col(null)(ng-view)
 		script(src='js/app.js')
+		script(src='js/nav.js')
 		script(src='js/index.js')
 		script(src='js/hello.js')
 		script(src='js/advertorial.js')
+		//- script(src='js/bundle.js')

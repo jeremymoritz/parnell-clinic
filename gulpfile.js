@@ -22,16 +22,18 @@ var jade = require('gulp-jade');
 var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
 var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var bower = require('gulp-bower');
 var concat = require('gulp-concat');
 var notify = require('gulp-notify');
-// var browserify = require('browserify');
-// var watchify = require('watchify');
+var browserify = require('browserify');
+var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 
 var path = {
 	JADE: 'src/jade/index.jade',
+	JADE_ALL: 'src/jade/*.jade',
 	HTML: 'src/index.html',
 	ALL: ['src/js/*.js', 'src/js/**/*.js', 'src/js/*.jsx', 'src/js/**/*.jsx', 'src/index.html'],
 	JS: ['src/js/*.jsx', 'src/js/**/*.jsx', 'src/js/*.js', 'src/js/**/*.js'],
@@ -63,7 +65,8 @@ gulp.task('clean', function taskClean() {
 
 //  Turn Jade into HTML
 gulp.task('template', function taskTemplate() {
-	gulp.src(path.JADE)
+	// gulp.src(path.JADE)
+	gulp.src(path.JADE_ALL)
 		.pipe(jade({pretty: true}))
 		// .on('error', handleErrors)
 		.pipe(gulp.dest(path.DEST));
@@ -79,6 +82,7 @@ gulp.task('sass', function taskSass() {
 				return notify().write(err);
 			}
 		}))
+		.pipe(autoprefixer("last 2 versions", "> 2%", "ie 9"))
 		.pipe(sourcemaps.write('./maps/'))
 		.pipe(gulp.dest('dist/css'));
 });
@@ -118,37 +122,36 @@ gulp.task('watch', function taskWatchSrcAndUpdateDist() {
 	gulp.watch('src/static/**/*', ['copy-static']);
 });
 
-// gulp.task('browserify', function taskBrowserify() {
-// 	var bundleMethod = global.isWatching ? watchify : browserify;
+gulp.task('browserify', function taskBrowserify() {
+	var bundleMethod = global.isWatching ? watchify : browserify;
 
-// 	var bundler = bundleMethod({
-// 		// Specify the entry point of your app
-// 		entries: ['./src/js'],
-// 		// Add file extentions to make optional in your requires
-// 		extensions: []
-// 	});
+	var bundler = bundleMethod({
+		// Specify the entry point of your app
+		entries: ['./src/js'],
+		// Add file extentions to make optional in your requires
+		extensions: []
+	});
 
-// 	var bundle = function bundleFunction() {
-// 		// Enable source maps!
-// 		return bundler
-// 			.bundle()
-// 			// Report compile errors
-// 			.on('error', handleErrors)
-// 			// Use vinyl-source-stream to make the
-// 			// stream gulp compatible. Specify the
-// 			// desired output filename here.
-// 			.pipe(source('parnell.js'))
-// 			// Specify the output destination
-// 			.pipe(gulp.dest('dist'));
-// 	};
+	var bundle = function bundleFunction() {
+		// Enable source maps!
+		return bundler
+			.bundle()
+			// Report compile errors
+			.on('error', handleErrors)
+			// Use vinyl-source-stream to make the stream gulp compatible.
+			// Specify the output filename here.
+			.pipe(source('js/bundle.js'))
+			// Specify the output destination
+			.pipe(gulp.dest(path.DEST));
+	};
 
-// 	return bundle();
-// });
+	return bundle();
+});
 
 // Default Task (perform these tasks in order)
 gulp.task('default', [
 	'template',
-	// 'browserify',
+	'browserify',
 	'sass',
 	'scripts',
 	'copy-static',

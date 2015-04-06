@@ -64,18 +64,7 @@ input[type='text'], textarea {
 	}
 }
 
-.pnl-navbar-tabs {
-	@media screen and (min-width: $screen-sm-min) {
-		height: 42px;
-		min-height: 42px;
-
-		.navbar-brand {line-height: 0;}
-		.navbar-header {height: 42px;}
-	}
-}
-
 /* Variations on the Flatly Theme */
-
 .panel {
 	box-shadow: 1px 1px 3px $gray;
 }

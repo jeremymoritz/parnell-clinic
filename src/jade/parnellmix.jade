@@ -14,7 +14,7 @@ mixin col(xs, sm, md, lg)
 
 //- Common page navigation bar
 mixin pnl-navbar
-	nav.navbar.navbar-default.navbar-fixed-top(role='navigation')&attributes(attributes)
+	nav.navbar.navbar-default.navbar-fixed-top(role='navigation' ng-controller='NavCtrl')&attributes(attributes)
 		.container-fluid
 			.navbar-header
 				button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#pnl-collapsible-nav')
@@ -25,5 +25,5 @@ mixin pnl-navbar
 				a.navbar-brand XYZ Clinic
 			#pnl-collapsible-nav.collapse.navbar-collapse
 				ul.nav.navbar-nav
-					li(ng-repeat='view in views')
-						a(ng-click='changeView(view)') #[i.fa(ng-class='"fa-" + view.icon')] {{view.display}}
+					li(ng-repeat='view in views', ng-class='navClass("view.name")')
+						a(ng-click='loadPage(view.name)') #[i.fa(ng-class='"fa-" + view.icon')] {{view.display}}
