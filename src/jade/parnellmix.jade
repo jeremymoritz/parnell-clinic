@@ -25,5 +25,5 @@ mixin pnl-navbar
 				a.navbar-brand XYZ Clinic
 			#pnl-collapsible-nav.collapse.navbar-collapse
 				ul.nav.navbar-nav
-					li(ng-repeat='controller in controllers')
-						a(ng-click='showController = controller.ctrl') #[i.fa(ng-class='"fa-" + controller.icon')] {{controller.display}}
+					li(ng-repeat='view in views')
+						a(ng-click='changeView(view)') #[i.fa(ng-class='"fa-" + view.icon')] {{view.display}}

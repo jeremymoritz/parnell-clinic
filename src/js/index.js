@@ -3,9 +3,7 @@ clinicApp.controller('IndexCtrl', [
 	function IndexCtrl($s) {
 		'use strict';
 
-		// $s.message = 'Hello Parnell';
-
-		$s.controllers = [{
+		$s.views = [{
 			ctrl: 'hello',
 			display: 'Hello',
 			icon: 'truck'
@@ -15,6 +13,10 @@ clinicApp.controller('IndexCtrl', [
 			display: 'Advertorial',
 			icon: 'puzzle-piece'
 		}];
-		$s.showController = null;
+		$s.chosenView = $s.views[0];
+
+		$s.changeView = function changeView(view) {
+			$s.chosenView = view;
+		};
 	}
 ]);
