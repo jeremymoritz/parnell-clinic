@@ -1,1 +1,0 @@
-//	Parnell scripts (every page)

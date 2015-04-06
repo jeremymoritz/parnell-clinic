@@ -25,9 +25,27 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var react = require('gulp-react');
 var bower = require('gulp-bower');
+var concat = require('gulp-concat');
 var notify = require('gulp-notify');
+var browserify = require('browserify');
+var watchify = require('watchify');
+var source = require('vinyl-source-stream');
 
-function handleErrors(args) {
+var path = {
+	JADE: 'src/jade/index.jade',
+	HTML: 'src/index.html',
+	ALL: ['src/js/*.js', 'src/js/**/*.js', 'src/js/*.jsx', 'src/js/**/*.jsx', 'src/index.html'],
+	JS: ['src/js/*.jsx', 'src/js/**/*.jsx', 'src/js/*.js', 'src/js/**/*.js'],
+	MINIFIED_OUT: 'build.min.js',
+	DEST_JS: 'dist/js',
+	DEST_SRC: 'dist/src',
+	DEST_BUILD: 'dist/build',
+	DEST: 'dist'
+};
+
+function handleErrors() {
+	var args = Array.prototype.slice.call(arguments);
+
 	// Send error to notification center with gulp-notify
 	notify.onError({
 		title: 'Compile Error',
@@ -41,15 +59,15 @@ function handleErrors(args) {
 // Delete all files (not folders) in the dist directory
 //	NOTE: THIS IS NOT RUN AUTOMATICALLY
 gulp.task('clean', function taskClean() {
-	del(['dist/*']);
+	del([path.DEST]);
 });
 
 //  Turn Jade into HTML
 gulp.task('template', function taskTemplate() {
-	gulp.src('src/jade/index.jade')
+	gulp.src(path.JADE)
 		.pipe(jade({pretty: true}))
 		// .on('error', handleErrors)
-		.pipe(gulp.dest('dist'));
+		.pipe(gulp.dest(path.DEST));
 });
 
 // Compile Our Sass
@@ -67,27 +85,26 @@ gulp.task('sass', function taskSass() {
 });
 
 gulp.task('transpile-jsx', function taskTranspileJSX() {
-  gulp.src('src/js/*.jsx')
+  gulp.src(path.JS)
 		.pipe(react({harmony: true}))   //  convert to .js files
 		.on('error', handleErrors)
-		.pipe(gulp.dest('dist/js'));
+		.pipe(gulp.dest(path.DEST_JS));
 });
 
 // Lint and JSCS our scripts
 gulp.task('scripts', function taskScripts() {
-	gulp.src('src/js/*.js')
+	gulp.src('dist/js/*.js')
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'))
 		.on('error', handleErrors)
 		.pipe(jscs())
-		.on('error', handleErrors)
-		.pipe(gulp.dest('dist/js'));
+		.on('error', handleErrors);
 });
 
 // Copy static directory without changes
 gulp.task('copy-static', function taskCopyStatic() {
 	gulp.src('src/static/**/*')
-		.pipe(gulp.dest('dist'))
+		.pipe(gulp.dest(path.DEST))
 		.on('error', handleErrors);
 });
 
@@ -109,10 +126,37 @@ gulp.task('watch', function taskWatchSrcAndUpdateDist() {
 	gulp.watch('src/static/**/*', ['copy-static']);
 });
 
+gulp.task('browserify', ['transpile-jsx'], function() {
+	var bundleMethod = global.isWatching ? watchify : browserify;
+
+	var bundler = bundleMethod({
+		// Specify the entry point of your app
+		entries: ['./dist/js/index.js'],
+		// Add file extentions to make optional in your requires
+		extensions: []
+	});
+
+	var bundle = function() {
+		// Enable source maps!
+		return bundler
+			.bundle()
+			// Report compile errors
+			.on('error', handleErrors)
+			// Use vinyl-source-stream to make the
+			// stream gulp compatible. Specify the
+			// desired output filename here.
+			.pipe(source('parnell.js'))
+			// Specify the output destination
+			.pipe(gulp.dest('dist'));
+	};
+
+	return bundle();
+});
+
 // Default Task (perform these tasks in order)
 gulp.task('default', [
 	'template',
-	'transpile-jsx',
+	'browserify',
 	'sass',
 	'scripts',
 	'copy-static',

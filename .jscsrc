@@ -58,7 +58,8 @@
   "disallowOperatorBeforeLineBreak": ["."],
   "disallowMultipleLineBreaks": true,
   "disallowSpacesInCallExpression": true,
-  "requireMultipleVarDecl": true,
+  "requireMultipleVarDecl": null,
+  "disallowMultipleVarDecl": true,
   "requireBlocksOnNewline": true,
   "requirePaddingNewlinesBeforeKeywords": [
     "do",
@@ -92,7 +93,6 @@
   "requireDotNotation": true,
   "disallowYodaConditions": true,
   "disallowNewlineBeforeBlockStatements": true,
-  "validateQuoteMarks": { "mark": "\"", "escape": true },
   "validateIndentation": "\t",
   "validateParameterSeparator": ", ",
   "safeContextKeyword": ["me", "view", "model", "router", "component", "app"],

@@ -1,15 +1,3 @@
-React.render(
-	<div>
-		<img src="img/parnell-logo.jpg" alt className="img-responsive hidden" />
-		<video id="oa-video" controls loop className="img img-responsive">
-			<source src="vid/oa-intro.mp4" type="video/mp4" />
-			Your browser does not support the video tag.
-		</video>
-		<img src="img/parnell-footer.jpg" alt className="img-responsive" />
-	</div>,
-	$('#advertorial')[0]
-);
-
 function playVideo() {
 	if (vid.paused || vid.ended) {
 		vid.muted = true;
@@ -17,6 +5,20 @@ function playVideo() {
 	}
 }
 
+var AdvertorialVideo = React.createClass({
+	render: function render() {
+		return (
+			<div>
+				<img src="img/parnell-logo.jpg" alt className="img-responsive hidden" />
+				<video id="oa-video" controls loop className="img img-responsive">
+					<source src="vid/oa-intro.mp4" type="video/mp4" />
+					Your browser does not support the video tag.
+				</video>
+				<img src="img/parnell-footer.jpg" alt className="img-responsive" />
+			</div>
+		);
+	}
+});
 var countIdle = 0;
 var vid = $('#oa-video')[0];
 
