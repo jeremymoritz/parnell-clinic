@@ -13,6 +13,12 @@ var clinicViews = [
 		url: '/intro',
 		templateUrl: 'partials/intro.html',
 		icon: 'puzzle-piece'
+	}, {
+		name: 'login',
+		display: 'Login',
+		url: '/login',
+		templateUrl: 'partials/login.html',
+		icon: 'lock'
 	}
 ];
 
