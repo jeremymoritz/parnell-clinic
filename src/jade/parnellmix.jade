@@ -25,7 +25,5 @@ mixin pnl-navbar
 				a.navbar-brand XYZ Clinic
 			#pnl-collapsible-nav.collapse.navbar-collapse
 				ul.nav.navbar-nav
-					li
-						a #[i.fa.fa-truck] GNDN1
-					li
-						a #[i.fa.fa-puzzle-piece] GNDN2
+					li(ng-repeat='controller in controllers')
+						a(ng-click='showController = controller.ctrl') #[i.fa(ng-class='"fa-" + controller.icon')] {{controller.display}}

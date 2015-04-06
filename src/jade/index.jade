@@ -20,8 +20,13 @@ html
 		+pnl-navbar
 		.container
 			.row
-				+col(null)
-					h1 Hello Message
-					h2 {{message}}
+				+col(null)(ng-show='showController === "hello"')
+					#hello-parnell(ng-controller='HelloCtrl')
+						h1 Hello Message
+						h2 {{message}}
+				+col(null)(ng-show='showController === "adv"')
+					include advertorial
 		script(src='js/app.js')
 		script(src='js/index.js')
+		script(src='js/hello.js')
+		script(src='js/advertorial.js')

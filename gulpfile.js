@@ -26,8 +26,8 @@ var sourcemaps = require('gulp-sourcemaps');
 var bower = require('gulp-bower');
 var concat = require('gulp-concat');
 var notify = require('gulp-notify');
-var browserify = require('browserify');
-var watchify = require('watchify');
+// var browserify = require('browserify');
+// var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 
 var path = {
@@ -87,8 +87,8 @@ gulp.task('sass', function taskSass() {
 gulp.task('scripts', function taskScripts() {
 	gulp.src('src/js/*.js')
 		.pipe(jshint())
-		.on('error', handleErrors)
 		.pipe(jshint.reporter('default'))
+		.on('error', handleErrors)
 		.pipe(jscs())
 		.on('error', handleErrors)
 		.pipe(gulp.dest(path.DEST_JS));
@@ -112,44 +112,43 @@ gulp.task('bower', function taskBower() {
 
 // Watch Files For Changes
 gulp.task('watch', function taskWatchSrcAndUpdateDist() {
-	gulp.watch('gulpfile.js', ['default']);
 	gulp.watch('src/jade/*.jade', ['template']);
 	gulp.watch('src/js/*', ['scripts']);
 	gulp.watch('src/scss/*.scss', ['sass']);
 	gulp.watch('src/static/**/*', ['copy-static']);
 });
 
-gulp.task('browserify', function taskBrowserify() {
-	var bundleMethod = global.isWatching ? watchify : browserify;
+// gulp.task('browserify', function taskBrowserify() {
+// 	var bundleMethod = global.isWatching ? watchify : browserify;
 
-	var bundler = bundleMethod({
-		// Specify the entry point of your app
-		entries: ['./src/js'],
-		// Add file extentions to make optional in your requires
-		extensions: []
-	});
+// 	var bundler = bundleMethod({
+// 		// Specify the entry point of your app
+// 		entries: ['./src/js'],
+// 		// Add file extentions to make optional in your requires
+// 		extensions: []
+// 	});
 
-	var bundle = function bundleFunction() {
-		// Enable source maps!
-		return bundler
-			.bundle()
-			// Report compile errors
-			.on('error', handleErrors)
-			// Use vinyl-source-stream to make the
-			// stream gulp compatible. Specify the
-			// desired output filename here.
-			.pipe(source('parnell.js'))
-			// Specify the output destination
-			.pipe(gulp.dest('dist'));
-	};
+// 	var bundle = function bundleFunction() {
+// 		// Enable source maps!
+// 		return bundler
+// 			.bundle()
+// 			// Report compile errors
+// 			.on('error', handleErrors)
+// 			// Use vinyl-source-stream to make the
+// 			// stream gulp compatible. Specify the
+// 			// desired output filename here.
+// 			.pipe(source('parnell.js'))
+// 			// Specify the output destination
+// 			.pipe(gulp.dest('dist'));
+// 	};
 
-	return bundle();
-});
+// 	return bundle();
+// });
 
 // Default Task (perform these tasks in order)
 gulp.task('default', [
 	'template',
-	'browserify',
+	// 'browserify',
 	'sass',
 	'scripts',
 	'copy-static',
