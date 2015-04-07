@@ -8,7 +8,15 @@ clinicApp.controller('NavCtrl', [
 		$s.views = [
 			{
 				name: 'home',
-				display: 'Hello',
+				display: 'Hi Buddy',
+				icon: 'truck'
+			}, {
+				name: 'breedTest',
+				display: 'BreedTest',
+				icon: 'truck'
+			}, {
+				name: 'entry1',
+				display: 'Initial Entry Form',
 				icon: 'truck'
 			}, {
 				name: 'advertorial',

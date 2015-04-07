@@ -1,0 +1,32 @@
+#Entry1Ctrl(ng-controller='Entry1Ctrl')
+	img(src='img/parnell-logo.jpg' alt class='img-responsive')
+	h1 'Enter the form information then talk to your vet.'
+	h3 'this is the beginning of the form'
+	table
+		tr
+			td
+				label
+					| Owner Name
+					input#bossName(type='text', name='ownerName', ng-model='owner.name')
+			td
+				label
+					| Dog Name
+					input#puppyName(type='text', name='dogName', ng-model='dog.name')
+		tr
+			td
+				label
+					| pet
+					input#mooCow(type='radio', name='pet', value="MooCow", checked)
+					input#puppyDog(type='radio', name='pet', value="BarkingDog")
+		tr
+			td
+				label
+					| Breed
+					select#breed.form-control(ng-model='dog.breed', ng-options="breed.type as breed.name for breed in breeds")
+						//- option(type="")
+			td
+				label
+					| History
+	img(src='img/parnell-footer.jpg' alt class='img-responsive')
+
+

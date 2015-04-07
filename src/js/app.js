@@ -13,6 +13,12 @@ clinicApp.config([
 		$routeProvider.when('/home', {
 			templateUrl: 'hello.html',
 			controller: 'HelloCtrl'
+		}).when('/breedTest', {
+			templateUrl: 'breed.html',
+			controller: 'BreedCtrl'
+		}).when('/entry1', {
+			templateUrl: 'entry1.html',
+			controller: 'Entry1Ctrl'
 		}).when('/advertorial',
 			advertorialTemplate
 		).otherwise(advertorialTemplate);

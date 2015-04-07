@@ -1,2 +1,3 @@
 #breed(ng-controller='BreedCtrl')
-select#breed.form-control(ng-model='')
+select#breed.form-control(ng-model='breed.type', ng-options="breed.type as breed.name for breed in breeds")
+	option(type="")

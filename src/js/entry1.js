@@ -1,7 +1,9 @@
-clinicApp.controller('BreedCtrl', [
+
+clinicApp.controller('Entry1Ctrl', [
 	'$scope',
-	function BreedCtrl($s) {
+	function Enrtry1Ctrl($s) {
 		'use strict';
+
 		$s.breeds = [
 			{
 				type: 'mutt',
@@ -29,9 +31,16 @@ clinicApp.controller('BreedCtrl', [
 				maxLbs: 1	
 			}
 		];
-		$s.chosenBreed = $s.breeds[0];
+
+		$s.owner = {name: ''};
+		$s.dog = {
+			name: '',
+			breed: $s.breeds[0]
+		};
+		
 		$s.changeBreed = function changeBreed(breed) {
-			$s.chosenBreed = breed;
+			$s.dog.breed = breed;
 		};
 	}
 ]);
+

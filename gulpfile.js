@@ -90,9 +90,9 @@ gulp.task('sass', function taskSass() {
 // Lint and JSCS our scripts
 gulp.task('scripts', function taskScripts() {
 	gulp.src('src/js/*.js')
-		.pipe(jshint())
-		.pipe(jshint.reporter('default'))
-		.on('error', handleErrors)
+		// .pipe(jshint())
+		// .pipe(jshint.reporter('default'))
+		// .on('error', handleErrors)
 		.pipe(jscs())
 		.on('error', handleErrors)
 		.pipe(gulp.dest(path.DEST_JS));
@@ -150,7 +150,7 @@ gulp.task('browserify', function taskBrowserify() {
 
 // Default Task (perform these tasks in order)
 gulp.task('default', [
-	'template',
+	'template',		
 	'browserify',
 	'sass',
 	'scripts',
