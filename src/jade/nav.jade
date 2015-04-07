@@ -1,0 +1,15 @@
+//- Parnell Navbar
+
+nav.navbar.navbar-default.navbar-fixed-top(role='navigation' ng-controller='NavCtrl')
+	.container-fluid
+		.navbar-header
+			button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#pnl-collapsible-nav')
+				span.sr-only Menu
+				span.icon-bar
+				span.icon-bar
+				span.icon-bar
+			a.navbar-brand XYZ Clinic
+		#pnl-collapsible-nav.collapse.navbar-collapse
+			ul.nav.navbar-nav
+				li(ng-repeat='view in views', ng-class='{active: isNavActive(view.name)}')
+					a(ng-click='loadPage(view.name)') #[i.fa(ng-class='"fa-" + view.icon')] {{view.display}}
