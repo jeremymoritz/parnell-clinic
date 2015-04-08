@@ -28,16 +28,22 @@ clinicApp.controller('Entry1Ctrl', [
 				type: 'evil',
 				name: 'Chihuahua',
 				risk: false,
-				maxLbs: 1	
+				maxLbs: 1
 			}
 		];
 
 		$s.owner = {name: ''};
 		$s.dog = {
 			name: '',
-			breed: $s.breeds[0]
+			breed: $s.breeds[0],
+			history: {
+				dysplasia: false,
+				jointInjury: false,
+				luxatingPatella: false,
+				jointSurgery: false
+			}
 		};
-		
+
 		$s.changeBreed = function changeBreed(breed) {
 			$s.dog.breed = breed;
 		};

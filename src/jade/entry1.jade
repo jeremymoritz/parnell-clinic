@@ -6,27 +6,48 @@
 		tr
 			td
 				label
-					| Owner Name
-					input#bossName(type='text', name='ownerName', ng-model='owner.name')
-			td
-				label
 					| Dog Name
 					input#puppyName(type='text', name='dogName', ng-model='dog.name')
+			td
+				label
+					| Owner Name
+					input#bossName(type='text', name='ownerName', ng-model='owner.name')
 		tr
 			td
 				label
-					| pet
-					input#mooCow(type='radio', name='pet', value="MooCow", checked)
-					input#puppyDog(type='radio', name='pet', value="BarkingDog")
+					| Pet Gender:
+					label
+						|Male
+						input#boyDog(type='radio', name='petGender', value="boyDog", checked)
+					label
+						|Female
+						input#girlDog(type='radio', name='petGender', value="girlDog")
 		tr
 			td
 				label
 					| Breed
 					select#breed.form-control(ng-model='dog.breed', ng-options="breed.type as breed.name for breed in breeds")
 						//- option(type="")
+		tr
 			td
 				label
-					| History
+					| History:
+					label
+						|Dysplasia
+					input#dysplasia(type='checkbox', name='hist-dysplasia', ng-model='dog.history.dysplasia')
+					label
+						|Dysplasia
+					input#jointInjury(type='checkbox', name='hist-jointInjury', ng-model='dog.history.jointInjury')
+					label
+						|Joint Injury
+					input#luxPat(type='checkbox', name='hist-luxatingPatella', ng-model='dog.history.luxatingPatella')
+					label
+						|Luxating Patella
+					input#jointSurgery(type='checkbox', name='hist-jointSurgery', ng-model='dog.history.jointSurgery')
+					label
+						|Joint Surgery
+
 	img(src='img/parnell-footer.jpg' alt class='img-responsive')
+
 
 
