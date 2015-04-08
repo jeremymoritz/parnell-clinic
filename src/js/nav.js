@@ -1,10 +1,11 @@
-
 clinicApp.controller('NavCtrl', [
 	'$scope',
-	'$location',
-	function IndexCtrl($s, $location) {
+	'$state',
+	'ClinicFactory',
+	function IndexCtrl($s, $state, CF) {
 		'use strict';
 
+<<<<<<< HEAD
 		$s.views = [
 			{
 				name: 'home',
@@ -27,14 +28,16 @@ clinicApp.controller('NavCtrl', [
 
 		$s.navClass = function navClass(page) {
 			var currentRoute = $location.path().substring(1) || '';
+=======
+		$s.views = CF.views;
+>>>>>>> 8f3cfc0d928d46f1a4b0d4c485037feb702b91f9
 
-			return page === currentRoute ? 'active' : '';
+		$s.isNavActive = function isNavActive(page) {
+			return page === $state.current.name;
 		};
 
-		var defaultPage = $s.views[0].name;
-
 		$s.loadPage = function loadPage(page) {
-			$location.url(_.includes(_.pluck($s.views, 'name'), page) ? page : defaultPage);
+			$state.go(page);
 		};
 	}
 ]);

@@ -33,10 +33,10 @@ var source = require('vinyl-source-stream');
 
 var path = {
 	JADE: 'src/jade/index.jade',
-	JADE_ALL: 'src/jade/*.jade',
+	JADE_ALL: 'src/jade/**/*.jade',
 	HTML: 'src/index.html',
-	ALL: ['src/js/*.js', 'src/js/**/*.js', 'src/js/*.jsx', 'src/js/**/*.jsx', 'src/index.html'],
-	JS: ['src/js/*.jsx', 'src/js/**/*.jsx', 'src/js/*.js', 'src/js/**/*.js'],
+	ALL: ['src/js/**/*.js', 'src/index.html'],
+	JS: ['src/js/**/*.js'],
 	MINIFIED_OUT: 'build.min.js',
 	DEST_JS: 'dist/js',
 	DEST_SRC: 'dist/src',
@@ -67,7 +67,10 @@ gulp.task('clean', function taskClean() {
 gulp.task('template', function taskTemplate() {
 	// gulp.src(path.JADE)
 	gulp.src(path.JADE_ALL)
-		.pipe(jade({pretty: true}))
+		.pipe(jade({
+			pretty: true,
+			doctype: 'html'
+		}))
 		// .on('error', handleErrors)
 		.pipe(gulp.dest(path.DEST));
 });
@@ -89,10 +92,17 @@ gulp.task('sass', function taskSass() {
 
 // Lint and JSCS our scripts
 gulp.task('scripts', function taskScripts() {
+<<<<<<< HEAD
 	gulp.src('src/js/*.js')
 		// .pipe(jshint())
 		// .pipe(jshint.reporter('default'))
 		// .on('error', handleErrors)
+=======
+	gulp.src(path.JS)
+		.pipe(jshint())
+		.pipe(jshint.reporter('default'))
+		.on('error', handleErrors)
+>>>>>>> 8f3cfc0d928d46f1a4b0d4c485037feb702b91f9
 		.pipe(jscs())
 		.on('error', handleErrors)
 		.pipe(gulp.dest(path.DEST_JS));
@@ -116,8 +126,8 @@ gulp.task('bower', function taskBower() {
 
 // Watch Files For Changes
 gulp.task('watch', function taskWatchSrcAndUpdateDist() {
-	gulp.watch('src/jade/*.jade', ['template']);
-	gulp.watch('src/js/*', ['scripts']);
+	gulp.watch(path.JADE_ALL, ['template']);
+	gulp.watch(path.JS, ['scripts']);
 	gulp.watch('src/scss/*.scss', ['sass']);
 	gulp.watch('src/static/**/*', ['copy-static']);
 });
